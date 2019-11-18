@@ -1,0 +1,10 @@
+.button {
+  text-decoration: none;
+  padding: 20px;
+  border-radius: 100px;
+  background: linear-gradient(313.2deg,#1978D2 0%,#0099FF 100%) !important;
+  width: 100%;
+  color: #fff;
+  display: block;
+  text-align: center;
+}
