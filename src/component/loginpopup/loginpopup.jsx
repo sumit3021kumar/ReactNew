@@ -13,7 +13,7 @@ class LoginPopUP extends React.Component {
          passwordinputType: "password",
          passwordinputName: "Password",
          passwordinputPlaceholder: "Enter password",
-         buttonHref: 'test',
+         buttonHref: 'http://google.com',
          buttonText: 'Submit'
       }
    }
