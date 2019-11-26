@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,6 +8,11 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
+
+import Content from '../content/Content.jsx';
+import Dashboard from '../dashboard/Dashboard.jsx';
+
+import './header.css';
 
 class Header extends React.Component {
   constructor() {
@@ -22,9 +28,31 @@ class Header extends React.Component {
    }
   render() {
     return (
-       <div className="headerMain">
-          <h1> Logo</h1>
-          <span className="date">{this.state.date}</span>
+       <div>
+        <Router>
+          <Switch>
+            <Route path="/logout">
+              <Logout dateProp={this.state.date} />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+          </Switch>
+         </Router>
+       </div>
+
+
+    );
+  }
+}
+
+class Logout extends React.Component {
+  render() {
+    return (
+      <div>
+        <div className="headerMain">
+          <img width="60" height="60" src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" />
+          <span className="date">{this.props.dateProp}</span>
           <Router>
             <div>
               <nav>
@@ -34,23 +62,20 @@ class Header extends React.Component {
                   </li>
                 </ul>
               </nav>
-
             {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
-            <Switch>
-              <Route path="/logout">
-                <Logout />
-              </Route>
-            </Switch>
           </div>
-        </Router>
+         </Router>
        </div>
+       <Dashboard />
+      </div>
     );
   }
 }
-
-function Logout() {
-  return <h2>Logout</h2>;
+function Login() {
+  return (
+     <Content />
+  );
 }
 
 export default Header;

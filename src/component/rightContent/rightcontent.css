@@ -1,0 +1,26 @@
+.rightContent {
+  background: #fff;
+  display: inline-block;
+  width: 100%;
+  padding: 30px;
+}
+.innerrightcontent {
+  box-shadow: 0px 5px 30px -2px #000;
+  display: inline-block;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.projectlevel {
+  font-size: 30px;
+  color: #6794CF;
+  background: #e5e5e5;
+  padding: 20px;
+}
+
+.project-list {
+    padding: 12px 20px;
+}
+.project-list:not(:last-child) {
+    border-bottom: 1px solid #808080;
+}

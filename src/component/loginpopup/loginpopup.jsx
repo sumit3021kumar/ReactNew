@@ -13,8 +13,9 @@ class LoginPopUP extends React.Component {
          passwordinputType: "password",
          passwordinputName: "Password",
          passwordinputPlaceholder: "Enter password",
-         buttonHref: 'http://google.com',
-         buttonText: 'Submit'
+         buttonHref: '/logout',
+         buttonText: 'Submit',
+         logoutRoute: '/logout'
       }
    }
   render() {
@@ -23,7 +24,7 @@ class LoginPopUP extends React.Component {
            <h1> Sign in</h1>
            <Input inputLabel= {this.state.inputName} inputType = { this.state.inputType } inputName = {this.state.inputName} inputPlaceholder ={this.state.inputPlaceholder}/>
            <Input inputLabel= {this.state.passwordinputName} inputType = { this.state.passwordinputType } inputName = {this.state.passwordinputName} inputPlaceholder ={this.state.passwordinputPlaceholder}/>
-           <Button buttonHref={this.state.buttonHref} buttonText={this.state.buttonText} />
+           <Button  buttonHref={this.state.buttonHref} buttonText={this.state.buttonText} />
       </div>
     );
   }

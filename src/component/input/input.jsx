@@ -6,7 +6,7 @@ class Input extends React.Component {
     return (
       <div className="inputField">
        <label> {this.props.inputLabel}</label>
-       <input type={ this.props.inputType} name={ this.props.inputName }  placeholder={ this.props.inputPlaceholder } />
+       <input value={this.props.inputValue} type={ this.props.inputType} name={ this.props.inputName }  placeholder={ this.props.inputPlaceholder } value={this.props.value} />
       </div>
     );
   }
