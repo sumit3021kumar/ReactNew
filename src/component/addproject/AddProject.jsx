@@ -5,6 +5,8 @@ import './addproject.css';
 
 class AddProject extends React.Component {
   constructor() {
+    localStorage.setItem('Projects',JSON.stringify(['My New Project','My New Project2']));
+
     super();
     this.state = {
       showPopup: false
@@ -31,36 +33,39 @@ class AddProject extends React.Component {
 
 class Popup extends React.Component {
     documentData;
-    itemsArray = [];
     constructor(props) {
         super(props);
+
+        this.state = {
+          title: '',
+          tasks:['My New Project','My New Project2'],
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        this.state = {
-          title: ''
-        }
     }
 
-handleChange= (e)=> {
-    this.setState({[e.target.name]:e.target.value});
-}
+
 // on form submit...
 handleFormSubmit(e) {
     e.preventDefault();
-    let notes = [...this.state.title];
-    notes.push(this.state);
-    localStorage.setItem('Project',JSON.stringify(notes));
+    let tasks = this.state.tasks;
+    let addtask = this.state.title;
+    tasks.push(addtask);
+    localStorage.setItem('Projects',JSON.stringify(tasks));
     this.setState({
-      notes: '',
-      title: ''
+      title: '',
     });
+}
+
+handleChange(e) {
+    this.setState({title :e.target.value});
 }
 
 // React Life Cycle
 componentDidMount() {
-    this.documentData = JSON.parse(localStorage.getItem('Project'));
+    this.documentData = JSON.parse(localStorage.getItem('Projects'));
 
-    if (localStorage.getItem('Project')) {
+    if (localStorage.getItem('Projects')) {
         this.setState({
             title: this.documentData.title
     })
