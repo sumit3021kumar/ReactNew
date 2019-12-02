@@ -20,7 +20,44 @@
 
 .project-list {
     padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    word-break: break-all;
 }
 .project-list:not(:last-child) {
     border-bottom: 1px solid #808080;
+}
+
+.project-list button {
+  text-decoration: none;
+  padding: 6px 10px;
+  border: 1px solid #000;
+  color: #000;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.project-list button:hover {
+  background: #069CE1;
+  border-color: transparent;
+  color: #fff;
+}
+
+.project-list .hidden {
+  display: none;
+}
+.project-list input {
+  border: 1px solid #d8d8d8;
+  border-radius: 3px;
+  text-align: center;
+  padding: 10px;
+}
+
+.project-list input.active:focus {
+  display: block;
+}
+
+.project-list input.active {
+  display: none;
 }

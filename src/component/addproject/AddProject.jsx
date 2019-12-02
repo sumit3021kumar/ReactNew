@@ -5,8 +5,6 @@ import './addproject.css';
 
 class AddProject extends React.Component {
   constructor() {
-    localStorage.setItem('Projects',JSON.stringify(['My New Project','My New Project2']));
-
     super();
     this.state = {
       showPopup: false
@@ -35,10 +33,9 @@ class Popup extends React.Component {
     documentData;
     constructor(props) {
         super(props);
-
         this.state = {
           title: '',
-          tasks:['My New Project','My New Project2'],
+          tasks: [],
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -50,8 +47,12 @@ handleFormSubmit(e) {
     e.preventDefault();
     let tasks = this.state.tasks;
     let addtask = this.state.title;
-    tasks.push(addtask);
-    localStorage.setItem('Projects',JSON.stringify(tasks));
+    let previousItem = localStorage.getItem('Projects');
+    previousItem = JSON.parse(previousItem);
+    if (addtask != '' && addtask != null) {
+      tasks.push(addtask);
+    }
+    localStorage.setItem('Projects', JSON.stringify(tasks.concat(previousItem)));
     this.setState({
       title: '',
     });
