@@ -1,5 +1,4 @@
 import React from 'react';
-import Input from './../input/input.jsx';
 import './addproject.css';
 
 
@@ -49,7 +48,7 @@ handleFormSubmit(e) {
     let addtask = this.state.title;
     let previousItem = localStorage.getItem('Projects');
     previousItem = JSON.parse(previousItem);
-    if (addtask != '' && addtask != null) {
+    if ((addtask !== null) && (addtask !== '')) {
       tasks.push(addtask);
     }
     localStorage.setItem('Projects', JSON.stringify(tasks.concat(previousItem)));

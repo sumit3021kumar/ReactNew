@@ -8,3 +8,15 @@
   text-align: center;
   margin: 0 0 30px 0
 }
+
+.button {
+  text-decoration: none;
+  padding: 20px;
+  border-radius: 100px;
+  background: linear-gradient(313.2deg,#1978D2 0%,#0099FF 100%) !important;
+  width: 100%;
+  color: #fff;
+  font-size: 16px;
+  display: block;
+  text-align: center;
+}

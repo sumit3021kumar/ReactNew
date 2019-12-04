@@ -47,6 +47,9 @@
 .project-list .hidden {
   display: none;
 }
+.project-list span {
+  color: #000;
+}
 .project-list input {
   border: 1px solid #d8d8d8;
   border-radius: 3px;
@@ -60,4 +63,9 @@
 
 .project-list input.active {
   display: none;
+}
+.Dashboard {
+  color: #fff;
+  font-size: 20px;
+  justify-content: center;
 }

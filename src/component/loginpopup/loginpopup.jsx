@@ -1,33 +1,55 @@
 import React from 'react';
+import {
+	withRouter
+} from 'react-router-dom';
 import Input from './../input/input.jsx';
-import Button from './../button/button.jsx';
 import './loginpopup.css';
 
 class LoginPopUP extends React.Component {
   constructor(props) {
-      super(props);
-      this.state = {
+    super(props);
+    this.state = {
          inputType: "text",
          inputName: "Email",
-         inputPlaceholder: "Enter Email",
          passwordinputType: "password",
          passwordinputName: "Password",
-         passwordinputPlaceholder: "Enter password",
-         buttonHref: '/logout',
-         buttonText: 'Submit',
-         logoutRoute: '/logout'
-      }
+         valueEmail: '',
+         valuePass: ''
+      };
+    this.handleChangeLogin = this.handleChangeLogin.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleClickLogin =  this.handleClickLogin.bind(this);
+   }
+   handleChangeEmail(e) {
+     this.setState({
+       valueEmail: e.target.value
+     });
+   }
+   handleChangeLogin(e) {
+     this.setState({
+       valuePass: e.target.value
+     });
+   }
+   handleClickLogin(e) {
+     e.preventDefault();
+     let email = this.state.valueEmail;
+     let pass = this.state.valuePass;
+		 if ( (email === 's') && (pass === '1')) {
+			 var arr = {'token': true};
+       localStorage.setItem('LoginDetail', JSON.stringify(arr));
+       this.props.history.push('/logout');
+     }
    }
   render() {
     return (
-      <div className="LoginPopUP">
-           <h1> Sign in</h1>
-           <Input inputLabel= {this.state.inputName} inputType = { this.state.inputType } inputName = {this.state.inputName} inputPlaceholder ={this.state.inputPlaceholder}/>
-           <Input inputLabel= {this.state.passwordinputName} inputType = { this.state.passwordinputType } inputName = {this.state.passwordinputName} inputPlaceholder ={this.state.passwordinputPlaceholder}/>
-           <Button  buttonHref={this.state.buttonHref} buttonText={this.state.buttonText} />
-      </div>
+      <form className="LoginPopUP" onSubmit={this.handleClickLogin} >
+         <h1> Sign in</h1>
+         <Input value={this.state.valueEmail} handleChange={this.handleChangeEmail} inputLabel= {this.state.inputName} inputType = {this.state.inputType} inputPlaceholder={'Enter Mail id'} />
+         <Input value={this.state.valuePass} handleChange={this.handleChangeLogin} inputLabel= {this.state.passwordinputName} inputType = {this.state.passwordinputType} inputPlaceholder={'Enter Password'} />
+         <input className="button button-blue" type="submit" value="submit"></input>
+      </form>
     );
   }
 }
 
-export default LoginPopUP;
+export default withRouter(LoginPopUP);
