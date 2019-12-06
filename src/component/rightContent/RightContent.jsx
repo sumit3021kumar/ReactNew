@@ -45,7 +45,16 @@ class RightContent extends React.Component {
     this.setState({ name : 'save'});
   }
   componentDidMount() {
-    let updatedtitle;
+    this.timerID = setInterval(
+       () => this.tick(),
+       1000
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+  tick() {
+    let updatedtitle = [];
     if (localStorage.getItem('Projects')) {
        updatedtitle = JSON.parse(localStorage.getItem('Projects'));
     }
@@ -53,6 +62,7 @@ class RightContent extends React.Component {
       title : updatedtitle
     });
   }
+
   render() {
     return (
       <div className="rightContent">
