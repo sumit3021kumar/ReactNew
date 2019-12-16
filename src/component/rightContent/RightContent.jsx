@@ -8,6 +8,9 @@ class RightContent extends React.Component {
     let title = [];
     if (localStorage.getItem('Projects')) {
        title = JSON.parse(localStorage.getItem('Projects'));
+       title = title.filter(function(el) {
+         return el != null;
+       });
     }
 
     this.state = {
@@ -57,6 +60,9 @@ class RightContent extends React.Component {
     let updatedtitle = [];
     if (localStorage.getItem('Projects')) {
        updatedtitle = JSON.parse(localStorage.getItem('Projects'));
+       updatedtitle = updatedtitle.filter(function(el) {
+         return el != null;
+       });
     }
     this.setState({
       title : updatedtitle

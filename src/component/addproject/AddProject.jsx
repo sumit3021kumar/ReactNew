@@ -35,6 +35,7 @@ class Popup extends React.Component {
         this.state = {
           title: '',
           tasks: [],
+          error: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -50,7 +51,13 @@ handleFormSubmit(e) {
     previousItem = JSON.parse(previousItem);
     if ((addtask !== null) && (addtask !== '')) {
       tasks.push(addtask);
+    } else {
+      this.setState({error: " please enter the project name"});
     }
+    tasks = tasks.filter(function(el){
+      return el != null;
+    });
+
     localStorage.setItem('Projects', JSON.stringify(tasks.concat(previousItem)));
     this.setState({
       title: '',
@@ -58,7 +65,8 @@ handleFormSubmit(e) {
 }
 
 handleChange(e) {
-    this.setState({title :e.target.value});
+    this.setState({title :e.target.value,
+    error: ''});
 }
 
 // React Life Cycle
@@ -84,6 +92,7 @@ render() {
                 <div className="form-group">
                     <label>Enter the Project</label>
                     <input type="text" name="title" className="form-control" value={this.state.title} onChange={this.handleChange} />
+                    {this.state.error ? (<span className="addproject-error">{this.state.error}</span>) : ''}
                 </div>
                 <button type="submit">Submit  </button>
                 <button onClick={this.props.closePopup}>Close</button>

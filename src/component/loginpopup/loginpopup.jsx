@@ -14,7 +14,9 @@ class LoginPopUP extends React.Component {
          passwordinputType: "password",
          passwordinputName: "Password",
          valueEmail: '',
-         valuePass: ''
+         valuePass: '',
+				 error: '',
+				 errorClass: 'error'
       };
     this.handleChangeLogin = this.handleChangeLogin.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
@@ -22,23 +24,38 @@ class LoginPopUP extends React.Component {
    }
    handleChangeEmail(e) {
      this.setState({
-       valueEmail: e.target.value
+       valueEmail: e.target.value,
+			 errorClass: 'error errorDisabled'
      });
    }
    handleChangeLogin(e) {
      this.setState({
-       valuePass: e.target.value
+       valuePass: e.target.value,
+			 errorClass: 'error errorDisabled'
      });
    }
    handleClickLogin(e) {
      e.preventDefault();
      let email = this.state.valueEmail;
      let pass = this.state.valuePass;
-		 if ( (email === 's') && (pass === '1')) {
+		 if ( (email === 'test@test.gmail.com') && (pass === 'srijan@123')) {
 			 var arr = {'token': true};
        localStorage.setItem('LoginDetail', JSON.stringify(arr));
        this.props.history.push('/logout');
-     }
+     } else {
+			 this.setState({error: "Something wrong with your Email and Password",
+			 errorClass: 'error errorEnabled'});
+		 }
+   }
+	 componentDidMount() {
+		 this.setS = setInterval(
+        () => this.setState({error: '',
+				      errorClass: 'error errorDisabled'}),
+        10000
+     );
+	 }
+	 componentWillUnmount() {
+		 clearInterval(this.setS);
    }
   render() {
     return (
@@ -47,6 +64,8 @@ class LoginPopUP extends React.Component {
          <Input value={this.state.valueEmail} handleChange={this.handleChangeEmail} inputLabel= {this.state.inputName} inputType = {this.state.inputType} inputPlaceholder={'Enter Mail id'} />
          <Input value={this.state.valuePass} handleChange={this.handleChangeLogin} inputLabel= {this.state.passwordinputName} inputType = {this.state.passwordinputType} inputPlaceholder={'Enter Password'} />
          <input className="button button-blue" type="submit" value="submit"></input>
+				 { this.state.errorClass ? <span className={this.state.errorClass}>{ this.state.error} </span> : ''}
+
       </form>
     );
   }
