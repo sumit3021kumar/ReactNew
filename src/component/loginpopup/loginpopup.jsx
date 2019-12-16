@@ -38,7 +38,7 @@ class LoginPopUP extends React.Component {
      e.preventDefault();
      let email = this.state.valueEmail;
      let pass = this.state.valuePass;
-		 if ( (email === 'test@test.gmail.com') && (pass === 'srijan@123')) {
+		 if ( (email === 'test@gmail.com') && (pass === '123')) {
 			 var arr = {'token': true};
        localStorage.setItem('LoginDetail', JSON.stringify(arr));
        this.props.history.push('/logout');
