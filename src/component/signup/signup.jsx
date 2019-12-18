@@ -76,10 +76,10 @@ class SignUp extends React.Component {
 
       <form className="sing-up-form LoginPopUP" onSubmit={this.handleOnSubmit.bind(this)}>
         <h1>Sign Up</h1>
-        {this.state.userCreated}
+        <span className="success">{this.state.userCreated}</span>
         <p>Please fill in this form to create an account.</p>
         <div className="inputField">
-          <label for="email"><b>Email</b></label>
+          <label for="email"><b>Email Or Username</b></label>
           <input onChange={this.handleEmailChange.bind(this)} type="text" placeholder="Enter Email" name="email" />
           {this.state.userexist}
         </div>

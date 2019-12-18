@@ -12,6 +12,7 @@
   max-width: 380px;
   display: inline-block;
   width: 100%;
+  position: fixed;
 }
 .left-content .logo,
 .left-content .paragraph  {
