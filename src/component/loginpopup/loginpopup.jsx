@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{ Suspense } from 'react';
 import {
 	withRouter
 } from 'react-router-dom';
@@ -39,9 +39,10 @@ class LoginPopUP extends React.Component {
      let email = this.state.valueEmail;
      let pass = this.state.valuePass;
 		 if ( (email === 'test@gmail.com') && (pass === '123')) {
-			 var arr = {'token': true};
+			 var arr = {'token': true, 'useremail' : email , 'password' : pass};
        localStorage.setItem('LoginDetail', JSON.stringify(arr));
-       this.props.history.push('/logout');
+			 email = email.substring(0, 4);
+       this.props.history.push(email);
      } else {
 			 this.setState({error: "Something wrong with your Email and Password",
 			 errorClass: 'error errorEnabled'});
@@ -59,14 +60,16 @@ class LoginPopUP extends React.Component {
    }
   render() {
     return (
-      <form className="LoginPopUP" onSubmit={this.handleClickLogin} >
-         <h1> Sign in</h1>
-         <Input value={this.state.valueEmail} handleChange={this.handleChangeEmail} inputLabel= {this.state.inputName} inputType = {this.state.inputType} inputPlaceholder={'Enter Mail id'} />
-         <Input value={this.state.valuePass} handleChange={this.handleChangeLogin} inputLabel= {this.state.passwordinputName} inputType = {this.state.passwordinputType} inputPlaceholder={'Enter Password'} />
-         <input className="button button-blue" type="submit" value="submit"></input>
-				 { this.state.errorClass ? <span className={this.state.errorClass}>{ this.state.error} </span> : ''}
+			<Suspense fallback={<div>Loading...</div>}>
+	      <form className="LoginPopUP" onSubmit={this.handleClickLogin} >
+	         <h1> Sign in</h1>
+	         <Input value={this.state.valueEmail} handleChange={this.handleChangeEmail} inputLabel= {this.state.inputName} inputType = {this.state.inputType} inputPlaceholder={'Enter Mail id'} />
+	         <Input value={this.state.valuePass} handleChange={this.handleChangeLogin} inputLabel= {this.state.passwordinputName} inputType = {this.state.passwordinputType} inputPlaceholder={'Enter Password'} />
+	         <input className="button button-blue" type="submit" value="submit"></input>
+					 { this.state.errorClass ? <span className={this.state.errorClass}>{ this.state.error} </span> : ''}
 
-      </form>
+	      </form>
+			</Suspense>
     );
   }
 }

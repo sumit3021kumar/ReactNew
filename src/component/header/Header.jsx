@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{ Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,13 +26,14 @@ class Header extends React.Component {
    }
   render() {
     return (
+      <Suspense fallback={<div>Loading...</div>}>
        <div>
         <Router>
           <Switch>
-            <Route path="/login">
+            <Route path="/signin">
               <Login />
             </Route>
-            <Route path="/logout" >
+            <Route path="/test" >
               <Logout dateProp={this.state.date} />
             </Route>
             <Route path='/'>
@@ -41,7 +42,7 @@ class Header extends React.Component {
           </Switch>
          </Router>
        </div>
-
+     	</Suspense>
 
     );
   }
@@ -52,16 +53,19 @@ class Logout extends React.Component {
     super(props);
     let loginArray = JSON.parse(localStorage.getItem('LoginDetail'));
     let token;
+    let useremail;
     let title = 'login';
     for (var prop in loginArray) {
       token = loginArray['token'];
+      useremail  = loginArray['useremail'];
     }
     if(token) {
       title = 'logout'
     }
     this.state = {
       button: '',
-      userText: title
+      userText: title,
+      useremail : useremail
     }
     this.logout = this.logout.bind(this);
   }
@@ -74,14 +78,14 @@ class Logout extends React.Component {
     return (
       <div>
         <div className="headerMain">
-          <a href="/login"><img alt="logo" width="60" height="60" src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" /></a>
-          <span className="date">{this.props.dateProp}</span>
+          <a href="/"><img alt="logo" width="60" height="60" src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" /></a>
+          <span className="date"> welcome {this.state.useremail } {this.props.dateProp}</span>
           <Router>
             <div>
               <nav>
                 <ul>
                   <li>
-                    <a href="/login" onClick={this.logout}>{this.state.userText}</a>
+                    <a href="/signin" onClick={this.logout}>{this.state.userText}</a>
                   </li>
                 </ul>
               </nav>
